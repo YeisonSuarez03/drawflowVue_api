@@ -22,16 +22,13 @@ type FileOutput struct {
 	Error string `json:"error,omitempty"`
 }
 
-func RunPythonFile(cmd *exec.Cmd, w http.ResponseWriter) (string, string){
+func RunPythonFile(cmd *exec.Cmd, w http.ResponseWriter) (string, string, error){
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 	err := cmd.Run()
-	if err != nil{
-		helpers.LogHttpError("Error while trying to execute python file", w, err, http.StatusInternalServerError)
-	}
 	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
-	return outStr, errStr
+	return outStr, errStr, err
 }
 
 func ExecuteProgram(w http.ResponseWriter, r *http.Request) {
@@ -57,14 +54,15 @@ func ExecuteProgram(w http.ResponseWriter, r *http.Request) {
 		return
     }
 	
-	outStr, errStr := RunPythonFile(exec.Command("python", pythonFileName), w)
+	outStr, errStr, err := RunPythonFile(exec.Command("python", pythonFileName), w)
+	os.Remove(pythonFileName)
+
+	if err != nil{
+		helpers.LogHttpError(errStr, w, err, http.StatusInternalServerError)
+		return
+	}
 
 	jsonFileResponse := FileOutput{Output: outStr, Error: errStr}
-	if err != nil{
-		helpers.LogHttpError("Error trying to marshal python file to bytes", w, err, http.StatusInternalServerError)
-	}
-	
-	os.Remove(pythonFileName)
 	json.NewEncoder(w).Encode(jsonFileResponse)
 
 }

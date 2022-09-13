@@ -48,5 +48,6 @@ func PostProgram(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//after all we return the assigned uids
+	// helpers.LogHttpError("Error trying to execute mutation" + assigned.String(), w, err, http.StatusServiceUnavailable)
 	json.NewEncoder(w).Encode(assigned.Uids)
 }
