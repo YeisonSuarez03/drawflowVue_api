@@ -1,9 +1,10 @@
 package main
 
 import (
-	"drawflow/handlers"
 	"fmt"
 	"net/http"
+
+	"github.com/YeisonSuarez03/drawflowVue_api/drawflow/handlers"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"

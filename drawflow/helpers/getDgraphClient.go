@@ -12,7 +12,7 @@ import (
   
 type CancelFunc func()  
 func GetDgraphClient() (*dgo.Dgraph, CancelFunc) {
-	conn, err := dgo.DialCloud("https://blue-surf-591316.us-east-1.aws.cloud.dgraph.io/graphql", "ZmM1OTMxODRkNWFkMDQ5Mjg2YjY0ZTVhNzA4ZDJjOGY=")
+	conn, err := dgo.DialCloud("https://blue-surf-600096.us-east-1.aws.cloud.dgraph.io/graphql", "OGM0Y2IxYmM5OTJhYmI4ZjY0YzJhODY2NzgwMzhlZTY=")
 	if err != nil {
 		log.Fatal("Connection error", err)
 	}

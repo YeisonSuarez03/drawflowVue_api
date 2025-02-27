@@ -1,10 +1,11 @@
 package helpers
 
 import (
-	"drawflow/drawflow"
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/YeisonSuarez03/drawflowVue_api/drawflow"
 )
 
 func LogHttpError(description string, w http.ResponseWriter, errorObtained error, status int) {

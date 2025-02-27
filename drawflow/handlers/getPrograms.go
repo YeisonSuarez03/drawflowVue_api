@@ -2,14 +2,16 @@ package handlers
 
 import (
 	"context"
-	"drawflow/drawflow"
-	"drawflow/helpers"
 	"encoding/json"
 	"net/http"
+
+	"github.com/YeisonSuarez03/drawflowVue_api/drawflow"
+	"github.com/YeisonSuarez03/drawflowVue_api/drawflow/helpers"
 )
 
 
 func GetPrograms(w http.ResponseWriter, r *http.Request) {
+
 	dg, cancel := helpers.GetDgraphClient()
 	defer cancel()
 

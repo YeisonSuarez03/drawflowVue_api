@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"bytes"
-	"drawflow/helpers"
+	"github.com/YeisonSuarez03/drawflowVue_api/drawflow/helpers"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
